@@ -1,0 +1,49 @@
+  <div>
+  <%= attachment_image_tag @tourism, :image %>
+  <p>観光地名：<%= @tourism.title %></p>
+  <p>説明：<%= @tourism.caption %></p>
+  <p>ユーザーネーム：<%= @tourism.user.name %></p>
+  <p>投稿日時：<%= @tourism.created_at.strftime('%Y/%m/%d') %></p>
+  <% if @tourism.user == current_user %>
+    <%= link_to "削除", tourism_path(@tourism), method: :delete %>
+  <% end %>
+  <div>
+  <% if @tourism.favorited_by?(current_user) %>
+    <p>
+      <%= link_to tourism_favorites_path(@tourism), method: :delete do %>
+        ♥<%= @tourism.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to tourism_favorites_path(@tourism), method: :post do %>
+        ♡<%= @tourism.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+ </div>
+
+ <div class="container">
+  <div class="row mt-5">
+  <div class="col-md-6">
+  <p>コメント件数:<%= @tourism.tourism_comments.count%></p>
+  <% @tourism.tourism_comments.each do |comment| %>
+    <p><%= attachment_image_tag comment.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><br><%= comment.comment %>
+    <% if comment.user == current_user %>
+<% if comment.user == current_user %>
+  <div>
+    <%= link_to "削除", tourism_tourism_comment_path(comment.tourism, comment), method: :delete %>
+  <% end %>
+  <% end %>
+  <% end %>
+
+  </div>
+</div>
+<div>
+<%= form_with(model:[@tourism, @tourism_comment], local: true) do |f| %>
+  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.submit "送信する" %>
+<% end %>
+</div>

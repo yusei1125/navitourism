@@ -1,8 +1,0 @@
-<% @tourism.each do |tourisms| %>
-<div>
-  <%= attachment_image_tag tourisms, :image %>
-  <p>：観光地名：<%= tourisms.title %></p>
-  <p>説明：<%= tourisms.caption %></p>
-  <p>ユーザーネーム：<%= tourisms.user.name %></p>
-</div>
-<% end %>

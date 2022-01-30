@@ -1,0 +1,2 @@
+module TourismCommentsHelper
+end
