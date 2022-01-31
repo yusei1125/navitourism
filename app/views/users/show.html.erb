@@ -28,7 +28,8 @@
               <div class="item-img-box2"><%= attachment_image_tag(tourisms, :image, size:"237x158", fallback: "no_image.png")%></div>
               <% end %>
               <p class="item-index-name font-weight-bold text-dark mt-2 mb-1"><b><%= tourisms.title %></b></p>
-
+              <td>いいね: <%= tourisms.favorites.count %></td>
+              <td>コメント: <%= tourisms.tourism_comments.count %></td>
             </div>
           <% end %>
         </div>
